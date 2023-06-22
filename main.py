@@ -31,35 +31,38 @@ async def connect_to_websocket():
                     # print(message)
                     if message.startswith('42'):
                         if message.find('new_bet') != -1:
-                            print(message)
-                            #data = json.loads(message[message.find('{'):message.rfind('}')+1])
+                            mycursor = mydb.cursor()
+
+                            id = data['userId']
+                            if data['user'] is not None:
+                                name = data['user']['name']
+                            else:
+                                name = None
+                            twoFactor = data['twoFactor']
+
+                            select_query = "SELECT * FROM users WHERE id = %s"
+                            mycursor.execute(select_query, [id])
+                            existing_user = mycursor.fetchone()
+
+                            if existing_user:
+                                if name:
+                                    update_query = "UPDATE users SET name = %s WHERE id = %s"
+                                    mycursor.execute(update_query, (name, id))
+                                if twoFactor:
+                                    update_query = "UPDATE users SET twoFactor = %s WHERE id = %s"
+                                    mycursor.execute(update_query, (twoFactor, id))
+                            else:
+                                if name:
+                                    insert_query = "INSERT INTO users (id, name, twoFactor) VALUES (%s, %s, %s)"
+                                    mycursor.execute(insert_query, (id, name, twoFactor))
+                                else:
+                                    insert_query = "INSERT INTO users (id, twoFactor) VALUES (%s, %s)"
+                                    mycursor.execute(insert_query, (id, twoFactor))
+
+                            mydb.commit()
+
                             
-                            # mycursor = mydb.cursor()
 
-                            # id = data['userId']
-                            # name = data['user']['name'] if 'user' in data else null
-                            # twoFactor = data['twoFactor']
-
-                            # select_query = "SELECT * FROM users WHERE id = %s"
-                            # mycursor.execute(select_query, [id])
-                            # existing_user = mycursor.fetchone()
-
-                            # if existing_user:
-                            #     if name:
-                            #         update_query = "UPDATE users SET name = %s WHERE id = %s"
-                            #         mycursor.execute(update_query, (name, id))
-                            #     if twoFactor:
-                            #         update_query = "UPDATE users SET twoFactor = %s WHERE id = %s"
-                            #         mycursor.execute(update_query, (twoFactor, id))
-                            # else:
-                            #     if name:
-                            #         insert_query = "INSERT INTO users (id, name, twoFactor) VALUES (%s, %s, %s)"
-                            #         mycursor.execute(insert_query, (id, name, twoFactor))
-                            #     else:
-                            #         insert_query = "INSERT INTO users (id, twoFactor) VALUES (%s, %s)"
-                            #         mycursor.execute(insert_query, (id, twoFactor))
-
-                            # mydb.commit()
 
                         if message.find('settingsUpdated') != -1:
                             data = json.loads(message[message.find('{'):message.rfind('}')+1])
