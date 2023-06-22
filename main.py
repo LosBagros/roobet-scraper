@@ -1,5 +1,16 @@
 import asyncio
 import websockets
+import json
+import mysql.connector
+
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="",
+  database="roobet"
+)
+
 
 async def send_message(websocket):
     while True:
@@ -17,8 +28,50 @@ async def connect_to_websocket():
                 while True:
                     message = await websocket.recv()
                     # Process the received message
-                    print(message)
-                    # print(".", end='', flush=True)
+                    # print(message)
+                    if message.startswith('42'):
+                        if message.find('new_bet') != -1:
+                            data = json.loads(message[message.find('{'):message.rfind('}')+1])
+                            mycursor = mydb.cursor()
+
+                            id = data['userId']
+                            name = data['user']['name'] if 'user' in data else null
+                            twoFactor = data['twoFactor']
+
+                            select_query = "SELECT * FROM users WHERE id = %s"
+                            mycursor.execute(select_query, [id])
+                            existing_user = mycursor.fetchone()
+
+                            if existing_user:
+                                if name:
+                                    update_query = "UPDATE users SET name = %s WHERE id = %s"
+                                    mycursor.execute(update_query, (name, id))
+                                if twoFactor:
+                                    update_query = "UPDATE users SET twoFactor = %s WHERE id = %s"
+                                    mycursor.execute(update_query, (twoFactor, id))
+                            else:
+                                if name:
+                                    insert_query = "INSERT INTO users (id, name, twoFactor) VALUES (%s, %s, %s)"
+                                    mycursor.execute(insert_query, (id, name, twoFactor))
+                                else:
+                                    insert_query = "INSERT INTO users (id, twoFactor) VALUES (%s, %s)"
+                                    mycursor.execute(insert_query, (id, twoFactor))
+
+                            mydb.commit()
+
+                        if message.find('settingsUpdated') != -1:
+                            data = json.loads(message[message.find('{'):message.rfind('}')+1])
+                            allTimeNumBets = data['globalStats']['allTimeNumBets']
+                            mycursor = mydb.cursor()
+
+                            sql = "INSERT INTO totalbets (allTimeNumBets) VALUES (%s)"
+                            mycursor.execute(sql, [allTimeNumBets])
+                            
+                            mydb.commit()
+
+                        if message.find('new_message') != -1:
+                            data = json.loads(message[message.find('{'):message.rfind('}')+1])
+                            # print("New message: ", data)
 
         except websockets.exceptions.ConnectionClosedOK:
             print("WebSocket connection closed with status code 1005 (no status code [internal])")
