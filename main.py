@@ -31,6 +31,7 @@ async def connect_to_websocket():
                     # print(message)
                     if message.startswith('42'):
                         if message.find('new_bet') != -1:
+                            data = json.loads(message[message.find('{'):message.rfind('}')+1])
                             mycursor = mydb.cursor()
 
                             id = data['userId']
@@ -60,6 +61,41 @@ async def connect_to_websocket():
                                     mycursor.execute(insert_query, (id, twoFactor))
 
                             mydb.commit()
+                            mycursor.close()
+                            mycursor = mydb.cursor()
+
+                            _id = data['_id']
+                            betAmount = data['betAmount']
+                            balanceType = data['balanceType']
+                            currency = data['currency']
+                            closedOut = data['closedOut']
+                            closeoutComplete = data['closeoutComplete']
+                            paidOut = data['paidOut']
+                            ranHooks = data['ranHooks']
+                            attempts = data['attempts']
+                            betId = data['betId']
+                            gameName = data['gameName']
+                            gameNameDisplay = data['gameNameDisplay']
+                            transactionIds = data['transactionIds']
+                            thirdParty = data['thirdParty']
+                            category = data['category']
+                            gameIdentifier = data['gameIdentifier']
+                            payoutValue = data['payoutValue']
+                            mult = data['mult']
+                            profit = data['profit']
+                            gameSessionId = data['gameSessionId']
+                            userId = data['userId']
+                            won = data['won']
+                            timestamp = data['timestamp']
+                            closeoutTimestamp = data['closeoutTimestamp']
+                            createdAt = data['createdAt']
+                            updatedAt = data['updatedAt']
+
+                            insert_query = "INSERT INTO bet (_id, betAmount, balanceType, currency, closedOut, closeoutComplete, paidOut, ranHooks, attempts, betId, gameName, gameNameDisplay, transactionIds, thirdParty, category, gameIdentifier, payoutValue, mult, profit, gameSessionId, userId, won, timestamp, closeoutTimestamp, createdAt, updatedAt) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                            mycursor.execute(insert_query, (_id, betAmount, balanceType, currency, closedOut, closeoutComplete, paidOut, ranHooks, attempts, betId, gameName, gameNameDisplay, json.dumps(transactionIds), thirdParty, category, gameIdentifier, payoutValue, mult, profit, gameSessionId, userId, won, timestamp, closeoutTimestamp, createdAt, updatedAt))
+                            
+                            mydb.commit()
+                            mycursor.close()
 
                             
 
@@ -73,6 +109,7 @@ async def connect_to_websocket():
                             mycursor.execute(sql, [allTimeNumBets])
                             
                             mydb.commit()
+                            mycursor.close()
 
                         if message.find('new_message') != -1:
                             data = json.loads(message[message.find('{'):message.rfind('}')+1])
