@@ -14,9 +14,14 @@ mydb = mysql.connector.connect(
 
 async def send_message(websocket):
     while True:
-        print("Sending message")
-        await websocket.send("2")
-        await asyncio.sleep(25)
+        try:
+            print("Sending message")
+            await websocket.send("2")
+            await asyncio.sleep(25)
+        except websockets.exceptions.ConnectionClosedOK:
+            print("WebSocket connection closed with status code 1000 (OK). Attempting to reconnect...")
+            await connect_to_websocket()
+
 
 async def connect_to_websocket():
     while True:
@@ -92,10 +97,7 @@ async def connect_to_websocket():
                             payoutValue = data['payoutValue']
                             mult = data['mult']
                             profit = data['profit']
-                            try:
-                                gameSessionId = data['gameSessionId']
-                            except:
-                                gameSessionId = None
+                            gameSessionId = data['gameSessionId']
                             userId = data['userId']
                             won = data['won']
                             timestamp = data['timestamp']
