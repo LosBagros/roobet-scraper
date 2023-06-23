@@ -37,6 +37,9 @@ function connectSocket() {
       if (message[0] === "settingsUpdated") {
         saveSettings(message[1]);
       }
+      if (message[0] === "chat_message") {
+        saveChat(message[1]);
+      }
     }
   });
 
@@ -78,10 +81,10 @@ async function saveData(data) {
       won,
       timestamp,
       closeoutTimestamp,
-      username,
       twoFactor,
       ...otherData
     } = data;
+    const username = data.user && data.user.name;
 
     // Handle user data
     const userSQL = `
@@ -150,6 +153,54 @@ async function saveSettings(data) {
     await connection.query(settingsSQL, [allTimeNumBets]);
   } catch (error) {
     console.error(`Failed to insert settings: ${error}`);
+  } finally {
+    if (connection) {
+      connection.release();
+    }
+  }
+}
+
+async function saveChat(chatData) {
+  const connection = await pool.getConnection();
+
+  try {
+    const {
+      id,
+      timestamp,
+      message,
+      userId,
+      type,
+      userStatus,
+      locale,
+    } = chatData;
+
+    const username = chatData.user && chatData.user.name;
+    const userSQL = `
+      INSERT INTO users (id, name) VALUES (?, ?)
+      ON DUPLICATE KEY UPDATE name = VALUES(name);
+    `;
+    const userParams = [userId || null, username || null];
+    await connection.query(userSQL, userParams);
+
+    // Handle chat data
+    const chatSQL = `
+      INSERT INTO chat (id, timestamp, message, userId, type, userStatus, locale)
+      VALUES (?, ?, ?, ?, ?, ?, ?);
+    `;
+    const chatParams = [
+      id || null,
+      timestamp || null,
+      message || null,
+      userId || null,
+      type || null,
+      userStatus || null,
+      locale || null
+    ];
+    await connection.query(chatSQL, chatParams);
+
+    // console.log(`Saved chat message from user: ${userId}`);
+  } catch (error) {
+    console.error(`Failed to insert chat data: ${error}`);
   } finally {
     if (connection) {
       connection.release();

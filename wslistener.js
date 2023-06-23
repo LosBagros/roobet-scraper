@@ -12,7 +12,9 @@ function connectSocket() {
     socket.addEventListener('message', function(event) {
       if (event.data.startsWith(42)) {
         const message = JSON.parse(event.data.substring(2));
-        console.log(message);
+        if (message[0] === "new_bet") {
+          console.log(message[1]);
+        }
       }
     });
     
