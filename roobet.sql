@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2023 at 01:37 PM
+-- Generation Time: Jun 23, 2023 at 07:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -73,6 +73,18 @@ CREATE TABLE `chat` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `totalbets`
+--
+
+CREATE TABLE `totalbets` (
+  `id` bigint(20) NOT NULL,
+  `allTimeNumBets` bigint(20) NOT NULL,
+  `timestamp` int(11) NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -101,10 +113,26 @@ ALTER TABLE `chat`
   ADD KEY `userId` (`userId`);
 
 --
+-- Indexes for table `totalbets`
+--
+ALTER TABLE `totalbets`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `totalbets`
+--
+ALTER TABLE `totalbets`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
