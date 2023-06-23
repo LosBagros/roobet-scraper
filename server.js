@@ -22,29 +22,32 @@ initialize();
 function connectSocket() {
   const socket = new WebSocket('wss://api.roobet.party/socket.io/?EIO=3&transport=websocket'); // Replace with your server's URL
 
-socket.addEventListener('open', function(event) {
-  console.log('Connected to the WebSocket server.');
-});
+  socket.addEventListener('open', function(event) {
+    console.log('Connected to the WebSocket server.');
+  });
 
-socket.addEventListener('message', function(event) {
-  if (event.data.startsWith(42)) {
-    const message = JSON.parse(event.data.substring(2));
-    if (message[0] === 'new_bet') {
-      saveData(message[1]);
+  socket.addEventListener('message', function(event) {
+    if (event.data.startsWith(42)) {
+      const message = JSON.parse(event.data.substring(2));
+      if (message[0] === 'new_bet') {
+        saveData(message[1]);
+      }
+      if (message[0] === 'settingsUpdated') {
+        saveSettings(message[1]);
+      }
     }
-  }
-});
+  });
 
-socket.addEventListener('close', function(event) {
-  console.log('Disconnected from the WebSocket server.');
-});
+  socket.addEventListener('close', function(event) {
+    console.log('Disconnected from the WebSocket server.');
+  });
 
-setInterval(() => {
-  socket.send(2);
-}, 20000);
+  setInterval(() => {
+    socket.send(2);
+  }, 20000);
 
-async function saveData(data) {
-  const connection = await pool.getConnection();
+  async function saveData(data) {
+    const connection = await pool.getConnection();
 
     try {
         const {
@@ -87,6 +90,24 @@ async function saveData(data) {
         console.error(`Failed to insert data: ${error}`);
     } finally {
         connection.release();
+    }
+  }
+
+  async function saveSettings(data) {
+    const connection = await pool.getConnection();
+
+    try {
+      const allTimeNumBets = data.globalStats.allTimeNumBets;
+      if (allTimeNumBets == null) {
+        return;
+      }
+      const settingsSQL = `
+        INSERT INTO totalbets (allTimeNumBets)
+        VALUES (?)
+      `;
+      await connection.query(settingsSQL, allTimeNumBets);
+    } catch (error) {
+      console.error(`Failed to insert settings: ${error}`);
     }
   }
 }
