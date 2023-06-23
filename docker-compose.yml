@@ -23,7 +23,7 @@ services:
     ports:
       - "${GRAFANA_PORT}:3000"
     volumes:
-      - ./grafana:/var/lib/grafana:Z
+      - 'grafana_storage:/var/lib/grafana'
     networks:
       - app-network
 
@@ -49,3 +49,6 @@ services:
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  grafana_storage: {}
