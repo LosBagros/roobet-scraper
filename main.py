@@ -37,81 +37,17 @@ async def connect_to_websocket():
                     if message.startswith('42'):
                         if message.find('new_bet') != -1:
                             data = json.loads(message[message.find('{'):message.rfind('}')+1])
-                            mycursor = mydb.cursor()
+                            print(data)
+                            if data['gameName'] == 'crash':
+                                mycursor = mydb.cursor()
+                                profit = data['profit']
+                                betid = data['betId']
+                                insert_query = "INSERT INTO crash (betid, profit) VALUES (%s, %s)"
+                                mycursor.execute(insert_query, (betid, profit))
 
-                            id = data['userId']
-                            if data['user'] is not None:
-                                name = data['user']['name']
-                            else:
-                                name = None
-                            twoFactor = data['twoFactor']
+                                mydb.commit()
+                                mycursor.close()
 
-                            select_query = "SELECT * FROM users WHERE id = %s"
-                            mycursor.execute(select_query, [id])
-                            existing_user = mycursor.fetchone()
-
-                            if existing_user:
-                                if name:
-                                    update_query = "UPDATE users SET name = %s WHERE id = %s"
-                                    mycursor.execute(update_query, (name, id))
-                                if twoFactor:
-                                    update_query = "UPDATE users SET twoFactor = %s WHERE id = %s"
-                                    mycursor.execute(update_query, (twoFactor, id))
-                            else:
-                                if name:
-                                    insert_query = "INSERT INTO users (id, name, twoFactor) VALUES (%s, %s, %s)"
-                                    mycursor.execute(insert_query, (id, name, twoFactor))
-                                else:
-                                    insert_query = "INSERT INTO users (id, twoFactor) VALUES (%s, %s)"
-                                    mycursor.execute(insert_query, (id, twoFactor))
-
-                            mydb.commit()
-                            mycursor.close()
-                            mycursor = mydb.cursor()
-
-                            _id = data['_id']
-                            betAmount = data['betAmount']
-                            balanceType = data['balanceType']
-                            currency = data['currency']
-                            closedOut = data['closedOut']
-                            closeoutComplete = data['closeoutComplete']
-                            paidOut = data['paidOut']
-                            ranHooks = data['ranHooks']
-                            attempts = data['attempts']
-                            betId = data['betId']
-                            gameName = data['gameName']
-                            try:
-                                gameNameDisplay = data['gameNameDisplay']
-                            except:
-                                gameNameDisplay = None
-                            transactionIds = data['transactionIds']
-                            try:
-                                thirdParty = data['thirdParty']
-                            except:
-                                thirdParty = None
-                            try:
-                                category = data['category']
-                            except:
-                                category = None
-                            gameIdentifier = data['gameIdentifier']
-                            payoutValue = data['payoutValue']
-                            mult = data['mult']
-                            profit = data['profit']
-                            gameSessionId = data['gameSessionId']
-                            userId = data['userId']
-                            won = data['won']
-                            timestamp = data['timestamp']
-                            closeoutTimestamp = data['closeoutTimestamp']
-                            createdAt = data['createdAt']
-                            updatedAt = data['updatedAt']
-
-                            insert_query = "INSERT INTO bet (_id, betAmount, balanceType, currency, closedOut, closeoutComplete, paidOut, ranHooks, attempts, betId, gameName, gameNameDisplay, transactionIds, thirdParty, category, gameIdentifier, payoutValue, mult, profit, gameSessionId, userId, won, timestamp, closeoutTimestamp, createdAt, updatedAt) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                            mycursor.execute(insert_query, (_id, betAmount, balanceType, currency, closedOut, closeoutComplete, paidOut, ranHooks, attempts, betId, gameName, gameNameDisplay, json.dumps(transactionIds), thirdParty, category, gameIdentifier, payoutValue, mult, profit, gameSessionId, userId, won, timestamp, closeoutTimestamp, createdAt, updatedAt))
-                            
-                            mydb.commit()
-                            mycursor.close()
-
-                            
 
 
                         if message.find('settingsUpdated') != -1:
@@ -125,8 +61,8 @@ async def connect_to_websocket():
                             mydb.commit()
                             mycursor.close()
 
-                        if message.find('new_message') != -1:
-                            data = json.loads(message[message.find('{'):message.rfind('}')+1])
+                        # if message.find('new_message') != -1:
+                            # data = json.loads(message[message.find('{'):message.rfind('}')+1])
                             # print("New message: ", data)
 
         except websockets.exceptions.ConnectionClosedOK:

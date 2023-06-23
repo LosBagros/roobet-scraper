@@ -25,14 +25,11 @@ RUN pip3 install -r /tmp/requirements.txt
 RUN wget -O /tmp/grafana.deb https://dl.grafana.com/oss/release/grafana_10.0.1_arm64.deb && \
     dpkg -i /tmp/grafana.deb
 
-# Copy the scraper script
-COPY main.py /
-
 # Copy the supervisord configuration file
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Expose ports
-EXPOSE 3000
+EXPOSE 3000 3306
 
 # Start supervisord
 CMD mkdir -p /var/run/mysqld && \
