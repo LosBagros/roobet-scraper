@@ -11,7 +11,7 @@ services:
     networks:
       - app-network
     ports:
-      - "${DB_PORT}:3306"
+      - "${DB_EXTERNAL_PORT}:3306"
     volumes:
       - ./mysql_data:/var/lib/mysql
       - ./roobet.sql:/docker-entrypoint-initdb.d/roobet.sql
