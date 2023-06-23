@@ -5,6 +5,8 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MARIADB_ROOT_PASSWORD: ${DB_PASS}
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: ${DB_ALLOW_EMPTY_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
@@ -49,6 +51,6 @@ services:
 networks:
   app-network:
     driver: bridge
-    
+
 volumes:
   grafana_storage: {}
