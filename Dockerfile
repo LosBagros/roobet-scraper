@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y mysql-server python3-pip supervisor wge
 
 # Set up MySQL
 RUN mkdir -p /nonexistent && chown mysql:mysql /nonexistent
-RUN service mysql start && mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'tajnyheslo';" && mysql -e "CREATE DATABASE roobet;"
+RUN service mysql start && mysql -e "CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';" && mysql -e "GRANT ALL PRIVILEGES ON `roobet`.* TO 'username'@'localhost';" && mysql -e "CREATE DATABASE roobet;"
 
 # Copy the SQL file
 COPY db.sql /tmp/

@@ -11,7 +11,7 @@ CREATE TABLE `bet` (
   `paidOut` tinyint(1) DEFAULT NULL,
   `ranHooks` tinyint(1) DEFAULT NULL,
   `attempts` int(11) DEFAULT NULL,
-  `betId` varchar(30) DEFAULT NULL,
+  `betId` varchar(60) DEFAULT NULL,
   `gameName` varchar(50) DEFAULT NULL,
   `gameNameDisplay` varchar(50) DEFAULT NULL,
   `transactionIds` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`transactionIds`)),
