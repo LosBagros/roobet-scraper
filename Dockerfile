@@ -1,38 +1,20 @@
-# Base image
-FROM ubuntu:latest
+# Use the official lightweight Node.js 14 image.
+# https://hub.docker.com/_/node
+FROM node:14-alpine
 
-# Install necessary packages
-RUN apt-get update && apt-get install -y mysql-server python3-pip supervisor wget
+# Create and change to the app directory.
+WORKDIR /app
 
-# Set up MySQL
-RUN mkdir -p /nonexistent && chown mysql:mysql /nonexistent
-RUN service mysql start && \
-    mysql -e "CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';" && \
-    mysql -e "GRANT ALL PRIVILEGES ON roobet.* TO 'username'@'localhost';" && \
-    mysql -e "CREATE DATABASE roobet;"
+# Copy application dependency manifests to the container image.
+# A wildcard is used to ensure both package.json AND package-lock.json are copied.
+# Copying this separately prevents re-running npm install on every code change.
+COPY package*.json ./
 
-# Copy the SQL file
-COPY db.sql /tmp/
+# Install production dependencies.
+RUN npm install --only=production
 
-# Import SQL file into MySQL
-RUN service mysql start && mysql roobet < /tmp/db.sql
+# Copy local code to the container image.
+COPY . .
 
-# Install Python dependencies
-COPY requirements.txt /tmp/
-RUN pip3 install -r /tmp/requirements.txt
-
-# Install Grafana
-RUN wget -O /tmp/grafana.deb https://dl.grafana.com/oss/release/grafana_10.0.1_arm64.deb && \
-    dpkg -i /tmp/grafana.deb
-
-# Copy the supervisord configuration file
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Expose ports
-EXPOSE 3000 3306
-
-# Start supervisord
-CMD mkdir -p /var/run/mysqld && \
-    chown -R mysql:mysql /var/run/mysqld && \
-    service mysql start && \
-    supervisord -n
+# Run the web service on container startup.
+CMD [ "node", "server.js" ]
