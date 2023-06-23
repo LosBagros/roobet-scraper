@@ -67,7 +67,7 @@ async function saveData(data) {
           paidOut, ranHooks, attempts, betId, gameName, gameNameDisplay, transactionIds,
           thirdParty, category, gameIdentifier, payoutValue, mult, profit,
           gameSessionId, userId, won)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,);
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       `;
       const betParams = [
           _id || null, betAmount || null, balanceType || null, currency || null,
