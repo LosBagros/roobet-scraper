@@ -50,6 +50,7 @@ function connectSocket() {
 }
 
 async function saveData(data) {
+  console.log(".");
   const connection = await pool.getConnection();
 
   try {
@@ -134,6 +135,7 @@ async function saveData(data) {
 }
 
 async function saveSettings(data) {
+  console.log(".");
   const connection = await pool.getConnection();
 
   try {
