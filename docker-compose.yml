@@ -38,7 +38,6 @@ services:
     networks:
       - app-network
     environment:
-      - PMA_ARBITRARY=1
       - PMA_HOST=db
       - "PMA_ABSOLUTE_URI=${PHPMYADMIN_URL}"
 
