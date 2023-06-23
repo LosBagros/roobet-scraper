@@ -47,11 +47,9 @@ CREATE TABLE `bet` (
   `payoutValue` float DEFAULT NULL,
   `mult` float DEFAULT NULL,
   `profit` float DEFAULT NULL,
-  `gameSessionId` varchar(30) DEFAULT NULL,
+  `gameSessionId` varchar(60) DEFAULT NULL,
   `userId` varchar(36) DEFAULT NULL,
   `won` tinyint(1) DEFAULT NULL,
-  `timestamp` timestamp NULL DEFAULT NULL,
-  `closeoutTimestamp` timestamp NULL DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

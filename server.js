@@ -8,9 +8,10 @@ let pool;
 async function initialize() {
     pool = mysql.createPool({
         host: process.env.DB_HOST,
-        user: process.env.DB_USER,
+        user: "root",
         password: process.env.DB_PASS,
         database: process.env.DB_NAME,
+        port: process.env.DB_PORT,
         waitForConnections: true,
         connectionLimit: 10,
         queueLimit: 0
@@ -65,8 +66,8 @@ async function saveData(data) {
           INSERT INTO bet (_id, betAmount, balanceType, currency, closedOut, closeoutComplete,
           paidOut, ranHooks, attempts, betId, gameName, gameNameDisplay, transactionIds,
           thirdParty, category, gameIdentifier, payoutValue, mult, profit,
-          gameSessionId, userId, won, timestamp, closeoutTimestamp)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          gameSessionId, userId, won)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,);
       `;
       const betParams = [
           _id || null, betAmount || null, balanceType || null, currency || null,
@@ -74,8 +75,7 @@ async function saveData(data) {
           attempts || null, betId || null, gameName || null, gameNameDisplay || null,
           transactionIds ? JSON.stringify(transactionIds) : null, thirdParty || null,
           category || null, gameIdentifier || null, payoutValue || null, mult || null,
-          profit || null, gameSessionId || null, userId || null, won || null,
-          timestamp || null, closeoutTimestamp || null
+          profit || null, gameSessionId || null, userId || null, won || null
       ];
       await connection.query(betSQL, betParams);
 
