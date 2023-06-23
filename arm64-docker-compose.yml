@@ -23,7 +23,7 @@ services:
     ports:
       - "${GRAFANA_PORT}:3000"
     volumes:
-      - ./grafana:/var/lib/grafana
+      - ./grafana:/var/lib/grafana:Z
     networks:
       - app-network
 
