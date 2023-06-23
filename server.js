@@ -50,7 +50,6 @@ function connectSocket() {
 }
 
 async function saveData(data) {
-  console.log(".");
   const connection = await pool.getConnection();
 
   try {
@@ -86,20 +85,20 @@ async function saveData(data) {
 
     // Handle user data
     const userSQL = `
-            INSERT INTO users (id, name, twoFactor) VALUES (?, ?, ?)
-            ON DUPLICATE KEY UPDATE name = VALUES(name), twoFactor = VALUES(twoFactor);
-        `;
+      INSERT INTO users (id, name, twoFactor) VALUES (?, ?, ?)
+      ON DUPLICATE KEY UPDATE name = VALUES(name), twoFactor = VALUES(twoFactor);
+    `;
     const userParams = [userId || null, username || null, twoFactor || null];
     await connection.query(userSQL, userParams);
 
     // Handle bet data
     const betSQL = `
-            INSERT INTO bet (_id, betAmount, balanceType, currency, closedOut, closeoutComplete,
-            paidOut, ranHooks, attempts, betId, gameName, gameNameDisplay, transactionIds,
-            thirdParty, category, gameIdentifier, payoutValue, mult, profit,
-            gameSessionId, userId, won)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-        `;
+      INSERT INTO bet (_id, betAmount, balanceType, currency, closedOut, closeoutComplete,
+      paidOut, ranHooks, attempts, betId, gameName, gameNameDisplay, transactionIds,
+      thirdParty, category, gameIdentifier, payoutValue, mult, profit,
+      gameSessionId, userId, won)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    `;
     const betParams = [
       _id || null,
       betAmount || null,
@@ -130,12 +129,13 @@ async function saveData(data) {
   } catch (error) {
     console.error(`Failed to insert data: ${error}`);
   } finally {
-    connection.release();
+    if (connection) {
+      connection.release();
+    }
   }
 }
 
 async function saveSettings(data) {
-  console.log(".");
   const connection = await pool.getConnection();
 
   try {
@@ -144,11 +144,15 @@ async function saveSettings(data) {
       return;
     }
     const settingsSQL = `
-        INSERT INTO totalbets (allTimeNumBets)
-        VALUES (?)
-      `;
-    await connection.query(settingsSQL, allTimeNumBets);
+      INSERT INTO totalbets (allTimeNumBets)
+      VALUES (?)
+    `;
+    await connection.query(settingsSQL, [allTimeNumBets]);
   } catch (error) {
     console.error(`Failed to insert settings: ${error}`);
+  } finally {
+    if (connection) {
+      connection.release();
+    }
   }
 }
