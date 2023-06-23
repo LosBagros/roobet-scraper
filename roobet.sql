@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2023 at 07:43 PM
+-- Generation Time: Jun 23, 2023 at 11:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -79,7 +79,7 @@ CREATE TABLE `chat` (
 CREATE TABLE `totalbets` (
   `id` bigint(20) NOT NULL,
   `allTimeNumBets` bigint(20) NOT NULL,
-  `timestamp` int(11) NOT NULL DEFAULT current_timestamp()
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

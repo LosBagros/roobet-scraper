@@ -1,4 +1,3 @@
-# neni otestovano
 version: '3.8'
 services:
   db:
@@ -16,6 +15,7 @@ services:
     volumes:
       - ./mysql_data:/var/lib/mysql
       - ./roobet.sql:/docker-entrypoint-initdb.d/roobet.sql
+
 
   grafana:
     image: grafana/grafana
@@ -49,6 +49,6 @@ services:
 networks:
   app-network:
     driver: bridge
-
+    
 volumes:
   grafana_storage: {}
