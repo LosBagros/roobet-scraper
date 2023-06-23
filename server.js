@@ -79,8 +79,6 @@ async function saveData(data) {
       gameSessionId,
       userId,
       won,
-      timestamp,
-      closeoutTimestamp,
       twoFactor,
       ...otherData
     } = data;
@@ -166,7 +164,6 @@ async function saveChat(chatData) {
   try {
     const {
       id,
-      timestamp,
       message,
       userId,
       type,
@@ -184,19 +181,17 @@ async function saveChat(chatData) {
 
     // Handle chat data
     const chatSQL = `
-      INSERT INTO chat (id, timestamp, message, userId, type, userStatus, locale)
-      VALUES (?, ?, ?, ?, ?, ?, ?);
+      INSERT INTO chat (id, message, userId, type, userStatus, locale)
+      VALUES (?, ?, ?, ?, ?, ?);
     `;
     const chatParams = [
       id || null,
-      timestamp || null,
       message || null,
       userId || null,
       type || null,
       userStatus || null,
       locale || null
     ];
-    console.log(timestamp)
     await connection.query(chatSQL, chatParams);
 
     // console.log(`Saved chat message from user: ${userId}`);
