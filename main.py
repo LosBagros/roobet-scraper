@@ -7,7 +7,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="tajnyheslo",
+  password="",
   database="roobet"
 )
 
@@ -75,15 +75,27 @@ async def connect_to_websocket():
                             attempts = data['attempts']
                             betId = data['betId']
                             gameName = data['gameName']
-                            gameNameDisplay = data['gameNameDisplay']
+                            try:
+                                gameNameDisplay = data['gameNameDisplay']
+                            except:
+                                gameNameDisplay = None
                             transactionIds = data['transactionIds']
-                            thirdParty = data['thirdParty']
-                            category = data['category']
+                            try:
+                                thirdParty = data['thirdParty']
+                            except:
+                                thirdParty = None
+                            try:
+                                category = data['category']
+                            except:
+                                category = None
                             gameIdentifier = data['gameIdentifier']
                             payoutValue = data['payoutValue']
                             mult = data['mult']
                             profit = data['profit']
-                            gameSessionId = data['gameSessionId']
+                            try:
+                                gameSessionId = data['gameSessionId']
+                            except:
+                                gameSessionId = None
                             userId = data['userId']
                             won = data['won']
                             timestamp = data['timestamp']
