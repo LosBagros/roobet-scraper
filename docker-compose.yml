@@ -1,45 +1,32 @@
-version: "3"
+version: '3.8'
 services:
   db:
-    image: mysql:8.0
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: roobet
-      MYSQL_USER: user
-      MYSQL_PASSWORD: userpass
-    volumes:
-      - db_data:/var/lib/mysql
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+    ports:
+      - "${DB_PORT}:3306"
     networks:
-      - roobet-network
+      - app-network
+    volumes:
+      - ./roobet.sql:/docker-entrypoint-initdb.d/roobet.sql
 
   grafana:
-    image: grafana/grafana:latest
-    depends_on:
-      - db
+    image: grafana/grafana
     ports:
-      - "2999:3000"
+      - "${GRAFANA_PORT}:3000"
     networks:
-      - roobet-network
+      - app-network
 
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - .:/app
-      - /app/node_modules
-    ports:
-      - "8080:8080"
+  node:
+    build: .
     depends_on:
       - db
     networks:
-      - roobet-network
+      - app-network
 
 networks:
-  roobet-network:
+  app-network:
     driver: bridge
-
-volumes:
-  db_data:
