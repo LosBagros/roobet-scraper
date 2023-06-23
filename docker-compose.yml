@@ -11,6 +11,7 @@ services:
     networks:
       - app-network
     volumes:
+      - ./mysql_data:/var/lib/mysql
       - ./roobet.sql:/docker-entrypoint-initdb.d/roobet.sql
 
   grafana:
