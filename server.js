@@ -196,6 +196,7 @@ async function saveChat(chatData) {
       userStatus || null,
       locale || null
     ];
+    console.log(timestamp)
     await connection.query(chatSQL, chatParams);
 
     // console.log(`Saved chat message from user: ${userId}`);

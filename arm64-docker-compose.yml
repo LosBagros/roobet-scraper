@@ -2,7 +2,7 @@
 version: '3.8'
 services:
   db:
-    image: arm64v8/mysql
+    image: mariadb
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
@@ -16,6 +16,7 @@ services:
     volumes:
       - ./mysql_data:/var/lib/mysql
       - ./roobet.sql:/docker-entrypoint-initdb.d/roobet.sql
+
 
   grafana:
     image: grafana/grafana
