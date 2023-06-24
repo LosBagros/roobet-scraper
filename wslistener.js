@@ -13,8 +13,7 @@ function connectSocket() {
       if (event.data.startsWith(42)) {
         const message = JSON.parse(event.data.substring(2));
         if (message[0] === "new_bet") {
-          const {_id, betAmount,betId,gameName, payoutValue} = message[1];
-          console.log(_id, betAmount,betId,gameName, payoutValue)
+          console.log(message[1]);
         }
       }
     });
