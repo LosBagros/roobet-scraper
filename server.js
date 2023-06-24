@@ -45,6 +45,7 @@ function connectSocket() {
 
   socket.addEventListener("close", function (event) {
     console.log("Disconnected from the WebSocket server.");
+        connectSocket();
   });
 
   setInterval(() => {
