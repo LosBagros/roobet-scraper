@@ -13,7 +13,8 @@ function connectSocket() {
       if (event.data.startsWith(42)) {
         const message = JSON.parse(event.data.substring(2));
         if (message[0] === "new_bet") {
-          console.log(message[1]);
+          const {_id, betAmount,betId,gameName, payoutValue} = message[1];
+          console.log(_id, betAmount,betId,gameName, payoutValue)
         }
       }
     });
@@ -24,5 +25,5 @@ function connectSocket() {
     
     setInterval(() => {
       socket.send(2);
-    }, 20000);
+    }, 25000);
 }
