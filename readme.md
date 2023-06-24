@@ -11,6 +11,14 @@ I was interested about this table with bets, so I made this scraper.
 I wanted to analyze whether the data is real. I made simple dashboard in grafana to visualize the data.
 I'm not sure if it's real, but it looks like it is. We will see.
 
+## To do list
+
+Need to fix db design, it's trash. Missing some columns, etc.
+
+- [ ] start saving anonymous users
+- [ ] don't know what to do when bet changes (save it as new bet or update the old one, now it's not saving because same primary key)
+
+Need to find out difference between timestamp, closeoutTimestamp, createdAt, updatedAt, addedAt
 ## Set up
 
 ```bash
