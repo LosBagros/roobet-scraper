@@ -28,6 +28,9 @@ services:
       - 'grafana_storage:/var/lib/grafana'
     networks:
       - app-network
+    environment:
+    - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
+
 
   node:
     build: .
@@ -46,7 +49,7 @@ services:
       - app-network
     environment:
       - PMA_HOST=db
-      - "PMA_ABSOLUTE_URI=${PHPMYADMIN_URL}"
+      - PMA_ABSOLUTE_URI=${PHPMYADMIN_URL}
 
 networks:
   app-network:
