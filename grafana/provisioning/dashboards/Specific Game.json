@@ -38,7 +38,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "description": "",
       "fieldConfig": {
@@ -87,7 +87,7 @@
           "dataset": "roobet",
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -130,7 +130,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "description": "",
       "fieldConfig": {
@@ -183,7 +183,7 @@
           "dataset": "roobet",
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -226,7 +226,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "fieldConfig": {
         "defaults": {
@@ -278,7 +278,7 @@
           "dataset": "roobet",
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -321,7 +321,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "description": "",
       "fieldConfig": {
@@ -370,7 +370,7 @@
           "dataset": "roobet",
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -413,7 +413,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "fieldConfig": {
         "defaults": {
@@ -465,7 +465,7 @@
           "dataset": "roobet",
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -521,7 +521,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "fieldConfig": {
         "defaults": {
@@ -603,7 +603,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -635,7 +635,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "fieldConfig": {
         "defaults": {
@@ -717,7 +717,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -749,7 +749,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "fieldConfig": {
         "defaults": {
@@ -827,7 +827,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -859,7 +859,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "fieldConfig": {
         "defaults": {
@@ -937,7 +937,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -969,7 +969,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "fieldConfig": {
         "defaults": {
@@ -1047,7 +1047,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -1079,7 +1079,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "fieldConfig": {
         "defaults": {
@@ -1157,7 +1157,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -1189,7 +1189,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "fieldConfig": {
         "defaults": {
@@ -1263,7 +1263,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -1295,7 +1295,7 @@
     {
       "datasource": {
         "type": "mysql",
-        "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+        "uid": "P211906C1C32DB77E"
       },
       "fieldConfig": {
         "defaults": {
@@ -1372,7 +1372,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "editorMode": "code",
           "format": "table",
@@ -1414,7 +1414,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "fieldConfig": {
             "defaults": {
@@ -1492,7 +1492,7 @@
             {
               "datasource": {
                 "type": "mysql",
-                "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+                "uid": "P211906C1C32DB77E"
               },
               "editorMode": "code",
               "format": "table",
@@ -1524,7 +1524,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "fieldConfig": {
             "defaults": {
@@ -1590,7 +1590,7 @@
             {
               "datasource": {
                 "type": "mysql",
-                "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+                "uid": "P211906C1C32DB77E"
               },
               "editorMode": "code",
               "format": "table",
@@ -1622,7 +1622,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "fieldConfig": {
             "defaults": {
@@ -1688,7 +1688,7 @@
             {
               "datasource": {
                 "type": "mysql",
-                "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+                "uid": "P211906C1C32DB77E"
               },
               "editorMode": "code",
               "format": "table",
@@ -1720,7 +1720,7 @@
         {
           "datasource": {
             "type": "mysql",
-            "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+            "uid": "P211906C1C32DB77E"
           },
           "fieldConfig": {
             "defaults": {
@@ -1846,7 +1846,7 @@
             {
               "datasource": {
                 "type": "mysql",
-                "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+                "uid": "P211906C1C32DB77E"
               },
               "editorMode": "code",
               "format": "table",
@@ -1894,7 +1894,7 @@
         },
         "datasource": {
           "type": "mysql",
-          "uid": "b81b52c0-fcf1-410d-bd62-e0bef7902757"
+          "uid": "P211906C1C32DB77E"
         },
         "definition": "SELECT DISTINCT IFNULL(gameNameDisplay, gameName) from roobet.bet",
         "hide": 0,

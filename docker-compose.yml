@@ -18,11 +18,17 @@ services:
       - ./roobet.sql:/docker-entrypoint-initdb.d/roobet.sql
 
   grafana-setup:
-    image: busybox
+    image: alpine
     volumes:
       - ./grafana/provisioning/datasources:/datasources
       - ./grafana/provisioning/datasources/templates:/templates
-    command: /bin/sh -c "envsubst < /templates/my_datasource.yaml.template > /datasources/my_datasource.yaml"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+    command: /bin/sh -c "apk add gettext && envsubst < /templates/mysql.yaml.template > /datasources/mysql.yaml"
 
   grafana:
     image: grafana/grafana
