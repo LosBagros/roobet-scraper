@@ -13,7 +13,9 @@ function connectSocket() {
       if (event.data.startsWith(42)) {
         const message = JSON.parse(event.data.substring(2));
         if (message[0] === "new_bet") {
-          console.log(message[1]);
+          if (message[1].gameNameDisplay === "Wanted Dead or a Wild") {
+            console.log(message[1]);
+          }
         }
       }
     });
