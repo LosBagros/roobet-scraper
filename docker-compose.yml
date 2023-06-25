@@ -4,12 +4,11 @@ services:
     image: mariadb
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASS}
-      MARIADB_ROOT_PASSWORD: ${DB_PASS}
-      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: ${DB_ALLOW_EMPTY_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ALLOW_EMPTY_PASSWORD: ${DB_ALLOW_EMPTY_PASSWORD}
     networks:
       - app-network
     ports:
@@ -18,15 +17,23 @@ services:
       - ./mysql_data:/var/lib/mysql
       - ./roobet.sql:/docker-entrypoint-initdb.d/roobet.sql
 
+  grafana-setup:
+    image: busybox
+    volumes:
+      - ./grafana/provisioning/datasources:/datasources
+      - ./grafana/provisioning/datasources/templates:/templates
+    command: /bin/sh -c "envsubst < /templates/my_datasource.yaml.template > /datasources/my_datasource.yaml"
 
   grafana:
     image: grafana/grafana
     restart: unless-stopped
+    depends_on:
+      - grafana-setup
     ports:
       - "${GRAFANA_PORT}:3000"
     volumes:
       - 'grafana_storage:/var/lib/grafana'
-      - ./grafana:/etc/grafana/provisioning
+      - './grafana/provisioning:/etc/grafana/provisioning'
     networks:
       - app-network
     environment:
