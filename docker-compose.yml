@@ -26,6 +26,7 @@ services:
       - "${GRAFANA_PORT}:3000"
     volumes:
       - 'grafana_storage:/var/lib/grafana'
+      - ./grafana:/etc/grafana/provisioning
     networks:
       - app-network
     environment:

@@ -13,8 +13,7 @@ I'm not sure if it's real, but it looks like it is. We will see.
 
 ## To do list
 
-Need to fix db design, it's trash. Missing some columns, etc.
-
+Need to fix db design, it's trash. Missing some columns. It could be done better.
 - [ ] start saving anonymous users
 - [ ] don't know what to do when bet changes (save it as new bet or update the old one, now it's not saving because same primary key)
 
@@ -29,10 +28,9 @@ vi .env # set up your credentials (feel free to use any editor)
 docker-compose up --build -d
 ```
 
-I have a `skill-issue` and I can't export the grafana config, when I'm done I'll put it here
-
 
 ## Screenshots
-![Some grafana stuff](img/grafana.png)
 ![DB Design](img/designer.png)
 ![PhpMyAdmin](img/crash.png)
+![Grafana general dashboard](img/grafana-main.png)
+![Grafana dashboard for specific game](img/grafana-crash.png)
